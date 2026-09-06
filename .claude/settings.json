@@ -1,0 +1,21 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_response.filePath // .tool_input.file_path' | { read -r f; [ -n \"$f\" ] && npx prettier --write --ignore-unknown \"$f\"; } 2>/dev/null || true",
+            "statusMessage": "Formatting with Prettier..."
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_response.filePath // .tool_input.file_path' | { read -r f; case \"$f\" in *.ts|*.tsx|*.js|*.jsx|*.mjs|*.cjs) npx oxlint \"$f\" 1>&2 ;; esac; }",
+            "statusMessage": "Linting with oxlint..."
+          }
+        ]
+      }
+    ]
+  }
+}
