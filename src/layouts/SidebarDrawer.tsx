@@ -58,7 +58,7 @@ export function SidebarDrawer({ open, onClose }: SidebarDrawerProps) {
             type="button"
             onClick={onClose}
             aria-label="Close navigation"
-            className="rounded-full p-1.5 text-muted transition-colors hover:bg-neutral-100 hover:text-ink"
+            className="rounded-full p-1.5 text-muted transition-colors hover:bg-neutral-100 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
           >
             <X className="size-5" aria-hidden />
           </button>

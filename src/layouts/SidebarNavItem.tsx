@@ -25,7 +25,7 @@ export function SidebarNavItem({
       onClick={onSelect}
       className={({ isActive }) =>
         cn(
-          'flex items-center gap-3 rounded-full px-4 py-2.5 text-sm font-medium transition-colors',
+          'flex items-center gap-3 rounded-full px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
           isActive
             ? 'bg-brand-500 text-white'
             : 'text-ink hover:bg-neutral-100',

@@ -59,7 +59,7 @@ export function SortMenu({ value, options, onChange }: SortMenuProps) {
                 role="option"
                 aria-selected={option.id === value}
                 className={cn(
-                  'flex w-full items-center justify-between gap-4 px-3 py-2 text-left text-sm hover:bg-neutral-50',
+                  'flex w-full items-center justify-between gap-4 px-3 py-2 text-left text-sm hover:bg-neutral-50 focus-visible:bg-neutral-50 focus-visible:outline-none',
                   option.id === value
                     ? 'font-medium text-brand-700'
                     : 'text-ink',

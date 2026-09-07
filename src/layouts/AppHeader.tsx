@@ -25,7 +25,7 @@ export function AppHeader({
             type="button"
             onClick={onMenuClick}
             aria-label="Open navigation"
-            className="rounded-full p-1.5 text-muted transition-colors hover:bg-neutral-100 hover:text-ink lg:hidden"
+            className="rounded-full p-1.5 text-muted transition-colors hover:bg-neutral-100 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 lg:hidden"
           >
             <Menu className="size-5" aria-hidden />
           </button>

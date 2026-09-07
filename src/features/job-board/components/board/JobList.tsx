@@ -25,7 +25,10 @@ export function JobList({
 }: JobListProps) {
   if (jobs.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-hairline bg-surface p-12 text-center text-sm text-muted">
+      <div
+        role="status"
+        className="rounded-2xl border border-dashed border-hairline bg-surface p-12 text-center text-sm text-muted"
+      >
         {emptyMessage}
       </div>
     )

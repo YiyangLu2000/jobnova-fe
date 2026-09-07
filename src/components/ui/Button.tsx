@@ -17,9 +17,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const BASE =
   'inline-flex items-center justify-center gap-2 rounded-full font-medium ' +
-  'whitespace-nowrap transition-colors focus-visible:outline-none ' +
-  'focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 ' +
-  'disabled:pointer-events-none disabled:opacity-50'
+  'whitespace-nowrap transition-colors motion-reduce:transition-none ' +
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ' +
+  'focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary: 'bg-brand-500 text-white hover:bg-brand-600',

@@ -27,7 +27,7 @@ export function TabNav({ activeTab, counts, onTabChange }: TabNavProps) {
             aria-current={activeTab === tab.id ? 'page' : undefined}
             onClick={() => onTabChange(tab.id)}
             className={cn(
-              'inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
+              'inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
               activeTab === tab.id
                 ? 'border border-brand-300 text-brand-700'
                 : 'border border-transparent text-muted hover:text-ink',

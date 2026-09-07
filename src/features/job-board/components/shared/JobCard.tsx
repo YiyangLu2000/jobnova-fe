@@ -39,6 +39,7 @@ export function JobCard({
     ? {
         role: 'button',
         tabIndex: 0,
+        'aria-label': `View ${job.title} at ${job.company.name}`,
         onClick: () => onOpen(job.id),
         onKeyDown: (event) => {
           if (event.key === 'Enter' || event.key === ' ') {
@@ -55,7 +56,7 @@ export function JobCard({
       className={cn(
         'rounded-2xl border border-hairline bg-surface p-4 sm:p-6',
         clickable &&
-          'cursor-pointer transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
+          'cursor-pointer transition-shadow motion-reduce:transition-none hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
         className,
       )}
     >

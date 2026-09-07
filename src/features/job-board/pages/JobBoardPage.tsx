@@ -68,7 +68,14 @@ export function JobBoardPage() {
 
         <MockInterviewPromoPanel className="lg:hidden" />
 
-        {firstLoad && <JobListSkeleton />}
+        {firstLoad && (
+          <>
+            <p role="status" className="sr-only">
+              Loading jobs
+            </p>
+            <JobListSkeleton />
+          </>
+        )}
 
         {showError && (
           <div className="rounded-2xl border border-hairline bg-surface p-12 text-center">
@@ -91,7 +98,7 @@ export function JobBoardPage() {
             <div
               className={cn(
                 refreshing &&
-                  'pointer-events-none opacity-60 transition-opacity',
+                  'pointer-events-none opacity-60 transition-opacity motion-reduce:transition-none',
               )}
             >
               <JobList
