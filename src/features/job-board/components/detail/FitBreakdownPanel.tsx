@@ -5,14 +5,22 @@ import { FitScoreGrid } from './FitScoreGrid'
 
 export interface FitBreakdownPanelProps {
   fit: FitBreakdown
+  /** `card` = bordered surface (desktop rail); `plain` = bare (already nested). */
+  variant?: 'card' | 'plain'
   className?: string
 }
 
-export function FitBreakdownPanel({ fit, className }: FitBreakdownPanelProps) {
+export function FitBreakdownPanel({
+  fit,
+  variant = 'card',
+  className,
+}: FitBreakdownPanelProps) {
   return (
     <aside
       className={cn(
-        'space-y-4 rounded-2xl border border-hairline bg-surface p-5',
+        'space-y-4',
+        variant === 'card' &&
+          'rounded-2xl border border-hairline bg-surface p-5',
         className,
       )}
     >

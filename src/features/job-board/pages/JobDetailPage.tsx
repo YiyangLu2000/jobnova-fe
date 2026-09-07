@@ -122,7 +122,11 @@ export function JobDetailPage() {
           />
 
           {fitBreakdown && (
-            <FitBreakdownPanel fit={fitBreakdown} className="lg:hidden" />
+            <FitBreakdownPanel
+              fit={fitBreakdown}
+              variant="plain"
+              className="border-t border-hairline pt-6 lg:hidden"
+            />
           )}
 
           <hr className="border-hairline" />

@@ -23,7 +23,7 @@ export function JobDetailActions({
   onBack,
 }: JobDetailActionsProps) {
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       <Button
         variant="ghost"
         size="sm"
@@ -32,7 +32,7 @@ export function JobDetailActions({
         aria-label="Back to jobs"
       />
       <Pill tone="purple">{job.applicantCount} applicants</Pill>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="flex w-full items-center justify-end gap-2 sm:ml-auto sm:w-auto">
         <ShareButton jobId={job.id} />
         <SaveButton saved={saved} onToggle={onToggleSave} />
         <Button

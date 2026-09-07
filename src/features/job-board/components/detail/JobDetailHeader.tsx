@@ -10,12 +10,23 @@ export interface JobDetailHeaderProps {
 
 export function JobDetailHeader({ job }: JobDetailHeaderProps) {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
-      <CompanyLogo
-        name={job.company.name}
-        logoUrl={job.company.logoUrl}
-        size="lg"
-      />
+    <div className="space-y-4 sm:flex sm:items-start sm:gap-5 sm:space-y-0">
+      {/* Mobile: logo left, ring right. sm+: this wrapper dissolves so logo
+          and the lg ring sit directly in the flex row around the text block. */}
+      <div className="flex items-start justify-between gap-4 sm:contents">
+        <CompanyLogo
+          name={job.company.name}
+          logoUrl={job.company.logoUrl}
+          size="lg"
+        />
+        <MatchRing
+          score={job.matchScore.score}
+          band={job.matchScore.band}
+          size="md"
+          className="sm:hidden"
+        />
+      </div>
+
       <div className="min-w-0 flex-1 space-y-2">
         <PostedTimePill postedAt={job.postedAt} />
         <h1 className="text-xl leading-tight font-bold text-ink sm:text-2xl">
@@ -27,20 +38,13 @@ export function JobDetailHeader({ job }: JobDetailHeaderProps) {
           workArrangement={job.workArrangement}
         />
       </div>
-      <div className="shrink-0">
-        <MatchRing
-          score={job.matchScore.score}
-          band={job.matchScore.band}
-          size="md"
-          className="sm:hidden"
-        />
-        <MatchRing
-          score={job.matchScore.score}
-          band={job.matchScore.band}
-          size="lg"
-          className="max-sm:hidden"
-        />
-      </div>
+
+      <MatchRing
+        score={job.matchScore.score}
+        band={job.matchScore.band}
+        size="lg"
+        className="max-sm:hidden shrink-0"
+      />
     </div>
   )
 }
