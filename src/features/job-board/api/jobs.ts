@@ -7,10 +7,18 @@
  * while tab filtering (matched / liked / applied) stays on the client.
  */
 
-import type { Job, JobSort, ReferenceJob } from '@/features/job-board/types'
+import type {
+  FitBreakdown,
+  Job,
+  JobDetail,
+  JobSort,
+  ReferenceJob,
+} from '@/features/job-board/types'
+import { computeFitBreakdown } from '@/features/job-board/lib/computeFitBreakdown'
 import { computeMatchScore } from '@/features/job-board/lib/computeMatchScore'
 import { delay } from '@/lib/delay'
 import { rawJobs, referenceJobs, type RawJob } from './fixtures'
+import { companyProfiles, jobDetailExtras } from './jobDetailFixtures'
 
 const LATENCY_MS = 320
 
@@ -28,9 +36,9 @@ export interface JobListResponse {
 }
 
 export interface JobResponse {
-  job: Job
+  job: JobDetail
   referenceJob: ReferenceJob
-  // fitBreakdown is added with the detail feature.
+  fitBreakdown: FitBreakdown
 }
 
 /** Thrown by `getJob` when the id matches no fixture. */
@@ -80,9 +88,23 @@ export async function getJob(
 ): Promise<JobResponse> {
   await delay(LATENCY_MS)
   const raw = rawJobs.find((job) => job.id === id)
-  if (!raw) throw new JobNotFoundError(id)
+  const extras = raw ? jobDetailExtras[id] : undefined
+  const profile = raw ? companyProfiles[raw.company.id] : undefined
+  if (!raw || !extras || !profile) throw new JobNotFoundError(id)
+
   const referenceJob = resolveReference(params.referenceJobId)
-  return { job: scoreJob(raw, referenceJob), referenceJob }
+  const scored = scoreJob(raw, referenceJob)
+  const job: JobDetail = {
+    ...scored,
+    ...structuredClone(extras),
+    company: { ...scored.company, ...structuredClone(profile) },
+  }
+
+  return {
+    job,
+    referenceJob,
+    fitBreakdown: computeFitBreakdown(job, referenceJob),
+  }
 }
 
 export async function getReferenceJobs(): Promise<ReferenceJob[]> {
