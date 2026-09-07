@@ -48,6 +48,7 @@ export const referenceJobs: ReferenceJob[] = [
     ],
     seniority: 'senior',
     experienceYears: 5,
+    educationLevel: 'bachelor',
   },
   {
     id: 'ref-fullstack',
@@ -62,6 +63,7 @@ export const referenceJobs: ReferenceJob[] = [
     ],
     seniority: 'mid',
     experienceYears: 4,
+    educationLevel: 'bachelor',
   },
   {
     id: 'ref-designer',
@@ -76,6 +78,7 @@ export const referenceJobs: ReferenceJob[] = [
     ],
     seniority: 'mid',
     experienceYears: 4,
+    educationLevel: 'master',
   },
 ]
 

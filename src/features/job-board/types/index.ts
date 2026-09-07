@@ -25,6 +25,19 @@ export const SENIORITY_ORDER = [
   'principal',
 ] as const satisfies readonly Seniority[]
 
+export type EducationLevel =
+  'none' | 'high-school' | 'associate' | 'bachelor' | 'master' | 'doctorate'
+
+/** Ordered low → high; index distance feeds the fit-breakdown scorer. */
+export const EDUCATION_ORDER = [
+  'none',
+  'high-school',
+  'associate',
+  'bachelor',
+  'master',
+  'doctorate',
+] as const satisfies readonly EducationLevel[]
+
 /** Drives the match-ring color band. */
 export type MatchBand = 'low' | 'medium' | 'high'
 
@@ -84,8 +97,67 @@ export interface ReferenceJob {
   skills: string[]
   seniority: Seniority
   experienceYears: number | null
+  educationLevel: EducationLevel
 }
 
 export type JobTab = 'matched' | 'liked' | 'applied'
 
 export type JobSort = 'top-matched' | 'recent'
+
+/* ---------- Job detail ---------- */
+
+export interface BenefitItem {
+  /** Leading emoji. */
+  icon: string
+  label: string
+  text: string
+}
+
+/** Company fields shown only on the detail page's Company panel. */
+export interface CompanyProfile extends Company {
+  foundedYear: number
+  headquarters: string
+  employeeRange: string
+  websiteUrl: string
+  socials: { x?: string; linkedin?: string }
+  about: string
+}
+
+/** A single job, expanded with everything the detail page renders. */
+export interface JobDetail extends Job {
+  company: CompanyProfile
+  country: string
+  minEducation: EducationLevel
+  qualificationIntro: string
+  qualificationSkills: string[]
+  requirements: { required: string[]; preferred: string[] }
+  responsibilities: string[]
+  benefitsIntro: string
+  benefits: BenefitItem[]
+}
+
+/* ---------- "Why is this job a good fit for me?" ---------- */
+
+export type FitDimensionKey =
+  'education' | 'workExperience' | 'skills' | 'experienceLevel'
+
+export interface FitDimension {
+  key: FitDimensionKey
+  label: string
+  /** Integer 0–100. */
+  score: number
+}
+
+export type FitStatus = 'good' | 'warning'
+
+export interface FitInsight {
+  key: string
+  title: string
+  status: FitStatus
+  body: string
+}
+
+export interface FitBreakdown {
+  dimensions: FitDimension[]
+  insights: FitInsight[]
+}
