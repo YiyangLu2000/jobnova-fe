@@ -1,4 +1,3 @@
-import type { HTMLAttributes } from 'react'
 import type { Job } from '@/features/job-board/types'
 import { cn } from '@/lib/cn'
 import { JobCardFooter } from '@/features/job-board/components/board/JobCardFooter'
@@ -15,10 +14,9 @@ export interface JobCardProps {
   applied: boolean
   onToggleSave: (jobId: string) => void
   onApply: (jobId: string) => void
-  /** Open the detail view. Only wired for `variant="list"`. */
+  /** Open the detail view. */
   onOpen: (jobId: string) => void
   onStartMockInterview: (jobId: string) => void
-  variant?: 'list' | 'detail'
   className?: string
 }
 
@@ -30,33 +28,22 @@ export function JobCard({
   onApply,
   onOpen,
   onStartMockInterview,
-  variant = 'list',
   className,
 }: JobCardProps) {
-  const clickable = variant === 'list'
-
-  const interactiveProps: HTMLAttributes<HTMLElement> = clickable
-    ? {
-        role: 'button',
-        tabIndex: 0,
-        'aria-label': `View ${job.title} at ${job.company.name}`,
-        onClick: () => onOpen(job.id),
-        onKeyDown: (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault()
-            onOpen(job.id)
-          }
-        },
-      }
-    : {}
-
   return (
     <article
-      {...interactiveProps}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${job.title} at ${job.company.name}`}
+      onClick={() => onOpen(job.id)}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          onOpen(job.id)
+        }
+      }}
       className={cn(
-        'rounded-2xl border border-hairline bg-surface p-4 sm:p-6',
-        clickable &&
-          'cursor-pointer transition-shadow motion-reduce:transition-none hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
+        'cursor-pointer rounded-2xl border border-hairline bg-surface p-4 transition-shadow motion-reduce:transition-none hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 sm:p-6',
         className,
       )}
     >
@@ -91,15 +78,13 @@ export function JobCard({
 
       <AttributeChipList job={job} className="mt-4" />
 
-      {clickable && (
-        <JobCardFooter
-          job={job}
-          applied={applied}
-          onApply={onApply}
-          onStartMockInterview={onStartMockInterview}
-          className="mt-4"
-        />
-      )}
+      <JobCardFooter
+        job={job}
+        applied={applied}
+        onApply={onApply}
+        onStartMockInterview={onStartMockInterview}
+        className="mt-4"
+      />
     </article>
   )
 }
