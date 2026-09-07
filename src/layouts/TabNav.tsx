@@ -16,11 +16,11 @@ const TABS: { id: JobTab; label: string }[] = [
 
 export function TabNav({ activeTab, counts, onTabChange }: TabNavProps) {
   return (
-    <div className="flex items-center">
+    <div className="flex w-max items-center">
       {TABS.map((tab, index) => (
         <Fragment key={tab.id}>
           {index > 0 && (
-            <span className="mx-2 h-4 w-px bg-hairline" aria-hidden />
+            <span className="mx-2 h-4 w-px shrink-0 bg-hairline" aria-hidden />
           )}
           <button
             type="button"

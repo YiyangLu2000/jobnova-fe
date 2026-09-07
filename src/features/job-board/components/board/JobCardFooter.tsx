@@ -30,7 +30,7 @@ export function JobCardFooter({
   return (
     <div
       className={cn(
-        'flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-4',
+        'flex flex-col gap-3 border-t border-hairline pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between',
         className,
       )}
     >
@@ -38,10 +38,11 @@ export function JobCardFooter({
         <PostedTimePill postedAt={job.postedAt} />
         <ApplicantCountText count={job.applicantCount} />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
         <Button
           variant="outline"
           disabled={applied}
+          className="w-full sm:w-auto"
           onClick={stop(() => onApply(job.id))}
         >
           {applied ? 'Applied' : 'Apply'}
@@ -49,6 +50,7 @@ export function JobCardFooter({
         <MockInterviewButton
           variant="lime"
           jobId={job.id}
+          className="w-full sm:w-auto"
           onClick={() => onStartMockInterview(job.id)}
         />
       </div>

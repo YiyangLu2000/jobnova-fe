@@ -7,6 +7,7 @@ export interface MockInterviewButtonProps {
   variant?: 'lime' | 'dark'
   size?: 'sm' | 'md'
   fullWidth?: boolean
+  className?: string
 }
 
 export function MockInterviewButton({
@@ -15,12 +16,14 @@ export function MockInterviewButton({
   variant = 'lime',
   size = 'md',
   fullWidth = false,
+  className,
 }: MockInterviewButtonProps) {
   return (
     <Button
       variant={variant}
       size={size}
       fullWidth={fullWidth}
+      className={className}
       leftIcon={variant === 'dark' ? ScanSearch : undefined}
       onClick={(event) => {
         event.stopPropagation()

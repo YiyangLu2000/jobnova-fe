@@ -7,6 +7,8 @@ export interface SidebarNavItemProps {
   icon: LucideIcon
   label: string
   badge?: number
+  /** Called after the link is activated — used to close the mobile drawer. */
+  onSelect?: () => void
 }
 
 export function SidebarNavItem({
@@ -14,11 +16,13 @@ export function SidebarNavItem({
   icon: Icon,
   label,
   badge,
+  onSelect,
 }: SidebarNavItemProps) {
   return (
     <NavLink
       to={to}
       end
+      onClick={onSelect}
       className={({ isActive }) =>
         cn(
           'flex items-center gap-3 rounded-full px-4 py-2.5 text-sm font-medium transition-colors',

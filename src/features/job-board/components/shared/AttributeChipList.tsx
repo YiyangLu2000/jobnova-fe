@@ -93,7 +93,13 @@ export function AttributeChipList({
   }
 
   return (
-    <div className={cn('flex flex-wrap items-center gap-2', className)}>
+    <div
+      className={cn(
+        // Mobile: single swipeable row. sm and up: wrap freely.
+        '-mx-1 flex items-center gap-2 overflow-x-auto px-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden [&>*]:shrink-0',
+        className,
+      )}
+    >
       <AttributeChip label={EMPLOYMENT_TYPE_LABEL[job.employmentType]} />
       <SkillMatchChip matched={matched} total={total} />
       {job.experienceYears != null && (

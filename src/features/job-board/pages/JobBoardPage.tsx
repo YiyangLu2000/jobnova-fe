@@ -66,6 +66,8 @@ export function JobBoardPage() {
           />
         )}
 
+        <MockInterviewPromoPanel className="lg:hidden" />
+
         {firstLoad && <JobListSkeleton />}
 
         {showError && (

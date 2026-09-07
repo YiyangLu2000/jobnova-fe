@@ -53,17 +53,24 @@ export function JobCard({
     <article
       {...interactiveProps}
       className={cn(
-        'rounded-2xl border border-hairline bg-surface p-6',
+        'rounded-2xl border border-hairline bg-surface p-4 sm:p-6',
         clickable &&
           'cursor-pointer transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
         className,
       )}
     >
-      <div className="flex gap-4">
+      <div className="flex gap-3 sm:gap-4">
+        <MatchRing
+          score={job.matchScore.score}
+          band={job.matchScore.band}
+          size="sm"
+          className="sm:hidden"
+        />
         <MatchRing
           score={job.matchScore.score}
           band={job.matchScore.band}
           size="md"
+          className="max-sm:hidden"
         />
         <div className="min-w-0 flex-1 space-y-1.5">
           <h3 className="text-lg leading-snug font-bold text-ink">
