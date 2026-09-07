@@ -1,1 +1,47 @@
 @import 'tailwindcss';
+
+/*
+ * Jobnova design tokens (Tailwind v4 — no tailwind.config.js).
+ * Palette anchored on the brand mark in public/favicon.svg.
+ * Match-ring band colors are provisional — see the plan's open questions.
+ */
+@theme {
+  /* Typography — Inter if present, graceful system fallback otherwise. */
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* Brand purple — favicon primary is brand-500 (#863bff). */
+  --color-brand-50: #f3efff;
+  --color-brand-100: #e6dbff;
+  --color-brand-200: #cbb4ff;
+  --color-brand-300: #ac8bff;
+  --color-brand-400: #9a6dff;
+  --color-brand-500: #863bff;
+  --color-brand-600: #7420f0;
+  --color-brand-700: #5c15c4;
+
+  /* Chartreuse CTA — "Mock Interview" buttons, count badges. */
+  --color-cta: #c6f24e;
+  --color-cta-hover: #b4e534;
+  --color-cta-ink: #1c2a05;
+
+  /* Secondary accent (favicon blue). */
+  --color-accent: #47bfff;
+
+  /* Match-ring bands: low <65, medium 65–79, high >=80. */
+  --color-match-low: #f5a524;
+  --color-match-medium: #cdd93f;
+  --color-match-high: #7ed321;
+
+  /* Surfaces & ink. */
+  --color-canvas: #ececec;
+  --color-surface: #ffffff;
+  --color-ink: #17171a;
+  --color-muted: #6b7280;
+  --color-hairline: #e5e7eb;
+
+  /* Radii. */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+}
