@@ -80,7 +80,9 @@ export function MatchRing({
             {Math.round(pct)}%
           </span>
         )}
-        <span className={cn('font-medium text-muted', s.label)}>{label}</span>
+        {label && (
+          <span className={cn('font-medium text-muted', s.label)}>{label}</span>
+        )}
       </span>
     </div>
   )

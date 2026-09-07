@@ -1,5 +1,7 @@
 export interface MockInterviewFeatureListProps {
   items?: ReadonlyArray<{ title: string; body: string }>
+  /** `stack` = bulleted list (promo panel); `row` = 3-column grid (callout). */
+  layout?: 'stack' | 'row'
 }
 
 const DEFAULT_ITEMS: ReadonlyArray<{ title: string; body: string }> = [
@@ -19,7 +21,21 @@ const DEFAULT_ITEMS: ReadonlyArray<{ title: string; body: string }> = [
 
 export function MockInterviewFeatureList({
   items = DEFAULT_ITEMS,
+  layout = 'stack',
 }: MockInterviewFeatureListProps) {
+  if (layout === 'row') {
+    return (
+      <ul className="grid gap-6 sm:grid-cols-3">
+        {items.map((item) => (
+          <li key={item.title} className="space-y-1">
+            <p className="text-sm font-semibold text-ink">{item.title}</p>
+            <p className="text-sm text-neutral-700">{item.body}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
   return (
     <ul className="space-y-3">
       {items.map((item) => (
