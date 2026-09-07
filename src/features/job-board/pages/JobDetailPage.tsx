@@ -63,7 +63,7 @@ export function JobDetailPage() {
         action={
           <Link
             to="/"
-            className="inline-block rounded-full bg-brand-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-600"
+            className="inline-block rounded-full bg-brand-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-600 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             Back to jobs
           </Link>

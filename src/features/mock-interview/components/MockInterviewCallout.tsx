@@ -18,9 +18,9 @@ export function MockInterviewCallout({
       <div className="flex items-start gap-4">
         <Bot className="size-8 shrink-0" aria-hidden />
         <div>
-          <h3 className="text-base font-bold">
+          <h2 className="text-base font-bold">
             Maximize your interview success
-          </h3>
+          </h2>
           <p className="mt-1 text-sm text-neutral-700">
             Our platform simulates real interview scenarios, helping you refine
             your responses and boost your confidence.
