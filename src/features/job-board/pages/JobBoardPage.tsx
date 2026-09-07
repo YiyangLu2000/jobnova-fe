@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import type { JobTab } from '@/features/job-board/types'
 import { Button } from '@/components/ui/Button'
+import { Spinner } from '@/components/ui/Spinner'
+import { cn } from '@/lib/cn'
 import { JobBoardToolbar } from '@/features/job-board/components/board/JobBoardToolbar'
 import { JobList } from '@/features/job-board/components/board/JobList'
 import { JobListSkeleton } from '@/features/job-board/components/board/JobListSkeleton'
@@ -37,6 +39,12 @@ export function JobBoardPage() {
     return jobs
   }, [jobs, tab, savedIds, appliedIds])
 
+  // First load shows a skeleton; a re-fetch (sort / reference change, retry)
+  // keeps the current list on screen and just dims it.
+  const firstLoad = isLoading && jobs.length === 0
+  const refreshing = isLoading && jobs.length > 0
+  const showError = error != null && jobs.length === 0
+
   function openJob(jobId: string) {
     const query = searchParams.toString()
     navigate(query ? `/jobs/${jobId}?${query}` : `/jobs/${jobId}`)
@@ -58,9 +66,9 @@ export function JobBoardPage() {
           />
         )}
 
-        {isLoading && <JobListSkeleton />}
+        {firstLoad && <JobListSkeleton />}
 
-        {!isLoading && error && (
+        {showError && (
           <div className="rounded-2xl border border-hairline bg-surface p-12 text-center">
             <p className="text-sm text-muted">
               Something went wrong loading jobs.
@@ -71,17 +79,31 @@ export function JobBoardPage() {
           </div>
         )}
 
-        {!isLoading && !error && (
-          <JobList
-            jobs={visibleJobs}
-            savedIds={savedIds}
-            appliedIds={appliedIds}
-            onToggleSave={toggleSaved}
-            onApply={markApplied}
-            onOpenJob={openJob}
-            onStartMockInterview={startMockInterview}
-            emptyMessage={EMPTY_MESSAGE[tab]}
-          />
+        {!firstLoad && !showError && (
+          <div className="relative" aria-busy={refreshing}>
+            {refreshing && (
+              <div className="absolute right-0 -top-9 flex items-center">
+                <Spinner size={16} label="Updating results" />
+              </div>
+            )}
+            <div
+              className={cn(
+                refreshing &&
+                  'pointer-events-none opacity-60 transition-opacity',
+              )}
+            >
+              <JobList
+                jobs={visibleJobs}
+                savedIds={savedIds}
+                appliedIds={appliedIds}
+                onToggleSave={toggleSaved}
+                onApply={markApplied}
+                onOpenJob={openJob}
+                onStartMockInterview={startMockInterview}
+                emptyMessage={EMPTY_MESSAGE[tab]}
+              />
+            </div>
+          </div>
         )}
       </div>
 
