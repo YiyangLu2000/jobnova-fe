@@ -2,6 +2,7 @@ import type { MouseEvent } from 'react'
 import type { Job } from '@/features/job-board/types'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/cn'
+import { MockInterviewButton } from '@/features/mock-interview/components/MockInterviewButton'
 import { ApplicantCountText } from '@/features/job-board/components/shared/ApplicantCountText'
 import { PostedTimePill } from '@/features/job-board/components/shared/PostedTimePill'
 
@@ -45,12 +46,11 @@ export function JobCardFooter({
         >
           {applied ? 'Applied' : 'Apply'}
         </Button>
-        <Button
+        <MockInterviewButton
           variant="lime"
-          onClick={stop(() => onStartMockInterview(job.id))}
-        >
-          Mock Interview
-        </Button>
+          jobId={job.id}
+          onClick={() => onStartMockInterview(job.id)}
+        />
       </div>
     </div>
   )
