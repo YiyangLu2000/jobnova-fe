@@ -18,7 +18,7 @@ export function AppHeader({
   onMenuClick,
 }: AppHeaderProps) {
   return (
-    <header className="flex flex-col gap-3 border-b border-hairline bg-surface px-4 py-3 sm:flex-row sm:items-center sm:gap-8 sm:px-6">
+    <header className="flex flex-col gap-3 border-b border-hairline bg-surface px-4 py-3 sm:flex-row sm:items-center sm:gap-8 sm:px-6 lg:sticky lg:top-0 lg:z-30 lg:h-14 lg:py-0">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
