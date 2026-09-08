@@ -7,7 +7,9 @@ import { defineConfig } from 'vite'
 const r = (p: string) => fileURLToPath(new URL(p, import.meta.url))
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // GitHub Pages serves this project at /jobnova-fe/; dev stays at root.
+  base: command === 'build' ? '/jobnova-fe/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -18,4 +20,4 @@ export default defineConfig({
       '@': r('./src'),
     },
   },
-})
+}))

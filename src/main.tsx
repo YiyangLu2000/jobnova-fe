@@ -7,16 +7,20 @@ import { AppShell } from '@/layouts/AppShell'
 import { JobBoardPage } from '@/features/job-board/pages/JobBoardPage'
 import { JobDetailPage } from '@/features/job-board/pages/JobDetailPage'
 
-const router = createBrowserRouter([
-  {
-    element: <AppShell />,
-    children: [
-      { index: true, element: <JobBoardPage /> },
-      { path: 'jobs/:jobId', element: <JobDetailPage /> },
-      { path: '*', element: <NotFound /> },
-    ],
-  },
-])
+const router = createBrowserRouter(
+  [
+    {
+      element: <AppShell />,
+      children: [
+        { index: true, element: <JobBoardPage /> },
+        { path: 'jobs/:jobId', element: <JobDetailPage /> },
+        { path: '*', element: <NotFound /> },
+      ],
+    },
+  ],
+  // Matches the Vite `base` so routing works under /jobnova-fe/ on GitHub Pages.
+  { basename: import.meta.env.BASE_URL },
+)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
