@@ -7,6 +7,7 @@
  */
 
 import type { Company, Job, ReferenceJob } from '@/features/job-board/types'
+import { asset } from '@/lib/asset'
 
 /** A job fixture before the api layer attaches a match score. */
 export type RawJob = Omit<Job, 'matchScore'>
@@ -15,22 +16,22 @@ export const companies = {
   google: {
     id: 'co-google',
     name: 'Google',
-    logoUrl: '/logos/google.svg',
+    logoUrl: asset('logos/google.svg'),
   },
   cursor: {
     id: 'co-cursor',
     name: 'Cursor',
-    logoUrl: '/logos/cursor.svg',
+    logoUrl: asset('logos/cursor.svg'),
   },
   backd: {
     id: 'co-backd',
     name: 'Backd Business Funding',
-    logoUrl: '/logos/backd.svg',
+    logoUrl: asset('logos/backd.svg'),
   },
   simons: {
     id: 'co-simons',
     name: 'Simons Foundation',
-    logoUrl: '/logos/simons.svg',
+    logoUrl: asset('logos/simons.svg'),
   },
 } satisfies Record<string, Company>
 

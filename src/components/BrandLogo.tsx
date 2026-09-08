@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import { cn } from '@/lib/cn'
 
 export interface BrandLogoProps {
@@ -7,8 +8,8 @@ export interface BrandLogoProps {
 }
 
 const SRC: Record<'full' | 'mark', string> = {
-  full: '/logos/jobnova.svg',
-  mark: '/favicon.svg',
+  full: asset('logos/jobnova.svg'),
+  mark: asset('favicon.svg'),
 }
 
 export function BrandLogo({ variant = 'full', className }: BrandLogoProps) {
